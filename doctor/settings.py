@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+load_dotenv()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -23,10 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-nll_tm870$@4c7sm1qzhm-l+xmew7fg==ajzz@geccr1bo55e_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -76,16 +79,29 @@ WSGI_APPLICATION = 'doctor.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'doctortest',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'localhost'
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'doctortest',
+#        'USER': 'postgres',
+#        'PASSWORD': '1234',
+#         'HOST': 'localhost'
 
-    }
+#    }
+#}
+
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ["PG_DATABASE_NAME"],
+        "USER": os.environ["PG_USERNAME"],
+        "PASSWORD": os.environ["PG_PASSWORD"],
+        "HOST": os.environ["PG_HOST"],
+        "PORT": os.environ["PG_PORT"],
+    },
 }
+
 
 
 # Password validation
@@ -122,8 +138,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = 'static/'
+#STATIC_URL = '/static/'
+#STATIC_ROOT = 'static/'
+
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media/'
 
 
 # Default primary key field type
