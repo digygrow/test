@@ -9,7 +9,7 @@ The doctor should be able to modify his infomations.
 The doctor should be able to add a patient with his first and last name ,birthdate, email.
 The doctor should be able to list all his patients.
 
-To run the project -
+To run the project :-
 
 Windows:
 
